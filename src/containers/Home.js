@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import connect from 'react-redux'
+import { connect } from 'react-redux'
 import {
   View,
   Text,
@@ -7,11 +7,12 @@ import {
   StyleSheet
 } from 'react-native'
 
-// import { login } from '../actions'
+import { login } from '../actions'
 
 class Home extends Component {
-  componentWillMount() {
-    console.log(this.props)
+
+  renderButton() {
+    
   }
 
   render() {
@@ -24,7 +25,7 @@ class Home extends Component {
         Simple fetch data from server with Redux Thunk
       </Text>
       <Button 
-        onPress={() => console.log('fetching data from server')} 
+        onPress={() => this.props.login()} 
         title={'FETCH DATA'} 
       />
     </View>
@@ -53,7 +54,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-  return { user: state.auth.user }
+  console.log(state)
+  return { auth: state.auth }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, { login })(Home)

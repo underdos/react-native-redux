@@ -7,6 +7,7 @@ import {
 } from './types'
 
 export const login = () => {
+  console.log('login processing')
   return (dispatch) => {
     dispatch({
       type: LOGIN,
@@ -14,7 +15,17 @@ export const login = () => {
     })
 
     axios.post('https://express-auth.herokuapp.com/auth/login', { email: 'kus.underdos@gmail.com', password: '12345678' })
-      .then((response) => dispatch({ type: LOGIN_SUCCESS, payload: response.data}))
-      .catch((error) => dispatch({ actions: LOGIN_FAILURE, payload: error }))
+      .then((response) => {
+        dispatch({
+          type: LOGIN_SUCCESS, 
+          payload: response.data.data
+        })
+      })
+      .catch((error) => {
+        dispatch({
+          type: LOGIN_FAILURE, 
+          payload: error 
+        })
+      })
   }
 }

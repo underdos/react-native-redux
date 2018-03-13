@@ -13,14 +13,14 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case LOGIN: 
+      console.log(action)
       return { ...state, loading: true }
-    break;
     case LOGIN_SUCCESS:
+      console.log(action)
       return { ...state, loading: false, user: action.payload }
-    break;
     case LOGIN_FAILURE:
+      console.log(action)
       return { ...state, loading: false, error: action.payload }
-    break;
     default:
       return state
   }
